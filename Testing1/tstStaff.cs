@@ -16,19 +16,6 @@ namespace Testing1
             Assert.IsNotNull(Staff);
         }
 
-        [TestMethod]
-        public void ActivePropertyOK()
-        {
-            // Instance of the Staff class.
-            clsStaff Staff = new clsStaff();
-            // Boolean to be assigned to the Active property.
-            Boolean TestData = true;
-            // Assign data to the property.
-            Staff.Active = TestData;
-            // Test to see if the two values are the same
-            Assert.AreEqual(Staff.Active, TestData);
-        }
-
 
         [TestMethod]
         public void StaffIDPropertyOK()
@@ -106,6 +93,131 @@ namespace Testing1
             Staff.ProductID = TestData;
             // Test to see if the two values are the same
             Assert.AreEqual(Staff.ProductID, TestData);
+        }
+
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            // Instance of the clsStaff Class.
+            clsStaff Staff = new clsStaff();
+            // Boolean to store the results of the validation.
+            Boolean Found = false;
+            // Test data to use with the method.
+            Int32 StaffID = 34;
+            // Invoke the method.
+            Found = Staff.Find(StaffID);
+            // Test to see if the result is true.
+            Assert.IsTrue(Found);
+        }
+
+        [TestMethod]
+        public void TestStaffIDFound()
+        {
+            // Instance of the clsStaff Class.
+            clsStaff Staff = new clsStaff();
+            // Boolean to store the results of the validation.
+            Boolean Found = false;
+            // Boolean to test if the data is ok (assume that it is).
+            Boolean OK = true;
+            // Test data to use with the method.
+            Int32 StaffID = 34;
+            // Invoke the method.
+            Found = Staff.Find(StaffID);
+            // Check if the provided StaffID is present
+            if(Staff.StaffID != StaffID)
+            {
+                OK = false;
+            }
+            // Test to see if the result is correct.
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestStaffNameFound()
+        {
+            // Instance of the clsStaff Class.
+            clsStaff Staff = new clsStaff();
+            // Boolean to store the results of the validation.
+            Boolean Found = false;
+            // Boolean to test if the data is ok (assume that it is).
+            Boolean OK = true;
+            // Test data to use with the method.
+            String StaffName = "Boop";
+            // Invoke the method.
+            Found = Staff.Find(StaffName);
+            // Check if the provided StaffID is present
+            if (!Staff.StaffName.Equals(StaffName))
+            {
+                OK = false;
+            }
+            // Test to see if the result is correct.
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestDateAccessedFound()
+        {
+            // Instance of the clsStaff Class.
+            clsStaff Staff = new clsStaff();
+            // Boolean to store the results of the validation.
+            Boolean Found = false;
+            // Boolean to test if the data is ok (assume that it is).
+            Boolean OK = true;
+            // Test data to use with the method.
+            DateTime DateAccessed = Convert.ToDateTime("01/01/2020");
+            // Invoke the method.
+            Found = Staff.Find(DateAccessed);
+            // Check if the provided StaffID is present
+            if (Staff.DateAccessed != DateAccessed)
+            {
+                OK = false;
+            }
+            // Test to see if the result is correct.
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestTotalCostFound()
+        {
+            // Instance of the clsStaff Class.
+            clsStaff Staff = new clsStaff();
+            // Boolean to store the results of the validation.
+            Boolean Found = false;
+            // Boolean to test if the data is ok (assume that it is).
+            Boolean OK = true;
+            // Test data to use with the method.
+            double TotalCost = 2.2;
+            // Invoke the method.
+            Found = Staff.Find(TotalCost);
+            // Check if the provided StaffID is present
+            if (Staff.TotalCost != TotalCost)
+            {
+                OK = false;
+            }
+            // Test to see if the result is correct.
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestGrantAccessFound()
+        {
+            // Instance of the clsStaff Class.
+            clsStaff Staff = new clsStaff();
+            // Boolean to store the results of the validation.
+            Boolean Found = false;
+            // Boolean to test if the data is ok (assume that it is).
+            Boolean OK = true;
+            // Test data to use with the method.
+            bool GrantAccess = true;
+            // Invoke the method.
+            Found = Staff.Find(GrantAccess);
+            // Check if the provided StaffID is present
+            if (Staff.GrantAccess != GrantAccess)
+            {
+                OK = false;
+            }
+            // Test to see if the result is correct.
+            Assert.IsTrue(OK);
         }
     }
 }

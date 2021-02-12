@@ -32,9 +32,6 @@
             <div>
                 <asp:CheckBox ID="chkGrantAccess" runat="server" Text="Grant Access" />
             </div>
-            <div>
-                <asp:CheckBox ID="chkActive" runat="server" Text="Active" />
-            </div>
         </div>
         <asp:Label ID="lblError" runat="server"></asp:Label>
         <p>

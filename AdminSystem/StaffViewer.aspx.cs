@@ -27,7 +27,5 @@ public partial class _1Viewer : System.Web.UI.Page
         Response.Write("<br>");
         Response.Write(Staff.GrantAccess);
         Response.Write("<br>");
-        Response.Write(Staff.Active);
-        Response.Write("<br>");
     }
 }

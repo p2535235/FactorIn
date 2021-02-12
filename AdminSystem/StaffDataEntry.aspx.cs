@@ -29,8 +29,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Staff.ProductID = int.Parse(txtProductID.Text);
         // Capture the GrantAccess Property.
         Staff.GrantAccess = chkGrantAccess.Checked;
-        // Capture the Active Property.
-        Staff.Active = chkActive.Checked;
         // Store the Staff object in the session object.
         Session["Staff"] = Staff;
         // Navigate to the viewer page.
