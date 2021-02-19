@@ -31,12 +31,12 @@ namespace ClassLibrary
             get
             {
                 // Returns the staffID variable.
-                return ProductID;
+                return productID;
             }
             set
             {
                 // Assigns the value to the staffID variable.
-                ProductID = value;
+                productID = value;
             }
         }
         public string StaffName
@@ -94,13 +94,33 @@ namespace ClassLibrary
 
         public bool Find(int StaffID)
         {
-            staffID = 34;
-            return true;
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@StaffID", StaffID);
+            DB.Execute("sproc_tblStaff_FilterByStaffID");
+
+            if (DB.Count == 1)
+            {
+                staffID = Convert.ToInt32(DB.DataTable.Rows[0]["StaffID"]);
+                staffName = Convert.ToString(DB.DataTable.Rows[0]["StaffName"]);
+                dateAccessed = Convert.ToDateTime(DB.DataTable.Rows[0]["DateAccessed"]);
+                totalCost = Convert.ToDouble(DB.DataTable.Rows[0]["TotalCost"]);
+                grantAccess = Convert.ToBoolean(DB.DataTable.Rows[0]["GrantAccess"]);
+
+                if (DB.DataTable.Rows[0]["ProductID"] == DBNull.Value) productID = 0;
+                else productID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool Find(string StaffName)
         {
-            staffName = "bloop";
+            staffName = "Boop";
             return true;
         }
 
