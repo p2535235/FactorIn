@@ -16,7 +16,6 @@ namespace Testing1
             Assert.IsNotNull(Staff);
         }
 
-
         [TestMethod]
         public void StaffIDPropertyOK()
         {
