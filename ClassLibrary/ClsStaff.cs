@@ -31,12 +31,12 @@ namespace ClassLibrary
             get
             {
                 // Returns the staffID variable.
-                return ProductID;
+                return productID;
             }
             set
             {
                 // Assigns the value to the staffID variable.
-                ProductID = value;
+                productID = value;
             }
         }
         public string StaffName
@@ -92,15 +92,42 @@ namespace ClassLibrary
             }
         }
 
+        // Method to find staff with the corresponding ID.
         public bool Find(int StaffID)
         {
-            staffID = 34;
-            return true;
+            // Establish database connection.
+            clsDataConnection DB = new clsDataConnection();
+
+            // Set up and execute the filter by staff id procedure.
+            DB.AddParameter("@StaffID", StaffID);
+            DB.Execute("sproc_tblStaff_FilterByStaffID");
+
+            // If there is one
+            if (DB.Count == 1)
+            {
+                // Assign the field variables the corresponding columns.
+                staffID = Convert.ToInt32(DB.DataTable.Rows[0]["StaffID"]);
+                staffName = Convert.ToString(DB.DataTable.Rows[0]["StaffName"]);
+                dateAccessed = Convert.ToDateTime(DB.DataTable.Rows[0]["DateAccessed"]);
+                totalCost = Convert.ToDouble(DB.DataTable.Rows[0]["TotalCost"]);
+                grantAccess = Convert.ToBoolean(DB.DataTable.Rows[0]["GrantAccess"]);
+
+                if (DB.DataTable.Rows[0]["ProductID"] == DBNull.Value) productID = 0;
+                else productID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
+
+                // Return true.
+                return true;
+            }
+            else
+            {
+                // Else return false.
+                return false;
+            }
         }
 
         public bool Find(string StaffName)
         {
-            staffName = "bloop";
+            staffName = "Boop";
             return true;
         }
 
@@ -122,6 +149,7 @@ namespace ClassLibrary
             return true;
         }
 
+        // This cannot be implemented.
         /*public bool Find(int ProductID)
         {
             staffID = 34;

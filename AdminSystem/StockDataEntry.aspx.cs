@@ -43,7 +43,7 @@ public partial class StockDataEntry : System.Web.UI.Page
 
 
 
-    protected void BtnFind_Click(object sender, EventArgs e)
+    protected void btnFind_Click(object sender, EventArgs e)
     {
         //creates an instance of Stock class
         clsStock AStock = new clsStock();

@@ -10,23 +10,24 @@
     <form id="form1" runat="server">
         <div>
             <div>
-                <asp:Label ID="lblStaffID" runat="server" BorderWidth="0px" Text="Staff ID" width="92px"></asp:Label>
+                <asp:Label ID="lblStaffID" runat="server" Text="Staff ID" width="180px"></asp:Label>
                 <asp:TextBox ID="txtStaffID" runat="server"></asp:TextBox>
+                <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" Text="Find" />
             </div>
             <div>
-                <asp:Label ID="lblStaffName" runat="server" BorderWidth="0px" Text="Staff Name" width="92px"></asp:Label>
+                <asp:Label ID="lblStaffName" runat="server" Text="Staff Name" width="180px"></asp:Label>
                 <asp:TextBox ID="txtStaffName" runat="server"></asp:TextBox>
             </div>
             <div>
-                <asp:Label ID="lblDateAccessed" runat="server" BorderWidth="0px" Text="Date Accessed"></asp:Label>
+                <asp:Label ID="lblDateAccessed" runat="server" Text="Date Accessed" width="180px"></asp:Label>
                 <asp:TextBox ID="txtDateAccessed" runat="server"></asp:TextBox>
             </div>
             <div>
-                <asp:Label ID="lblTotalCost" runat="server" BorderWidth="0px" Text="Total Cost" width="92px"></asp:Label>
+                <asp:Label ID="lblTotalCost" runat="server" Text="Total Cost" width="180px"></asp:Label>
                 <asp:TextBox ID="txtTotalCost" runat="server"></asp:TextBox>
             </div>
             <div>
-                <asp:Label ID="lblProductID" runat="server" BorderWidth="0px" Text="Product ID" width="92px"></asp:Label>
+                <asp:Label ID="lblProductID" runat="server" Text="Product ID" width="180px"></asp:Label>
                 <asp:TextBox ID="txtProductID" runat="server"></asp:TextBox>
             </div>
             <div>

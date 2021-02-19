@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Testing1
 {
     [TestClass]
-    public class UnitTest1
+    public class tstStaff
     {
         [TestMethod]
         public void InstanceOK()
@@ -15,7 +15,6 @@ namespace Testing1
             // Test to see that it exists.
             Assert.IsNotNull(Staff);
         }
-
 
         [TestMethod]
         public void StaffIDPropertyOK()
@@ -88,7 +87,7 @@ namespace Testing1
             // Instance of the Staff class.
             clsStaff Staff = new clsStaff();
             // int to be assigned to the ProductID property.
-            Int32 TestData = 1;
+            Int32 TestData = 0;
             // Assign data to the property.
             Staff.ProductID = TestData;
             // Test to see if the two values are the same
@@ -103,7 +102,7 @@ namespace Testing1
             // Boolean to store the results of the validation.
             Boolean Found = false;
             // Test data to use with the method.
-            Int32 StaffID = 34;
+            Int32 StaffID = 1;
             // Invoke the method.
             Found = Staff.Find(StaffID);
             // Test to see if the result is true.
@@ -120,11 +119,11 @@ namespace Testing1
             // Boolean to test if the data is ok (assume that it is).
             Boolean OK = true;
             // Test data to use with the method.
-            Int32 StaffID = 34;
+            Int32 StaffID = 1;
             // Invoke the method.
             Found = Staff.Find(StaffID);
             // Check if the provided StaffID is present
-            if(Staff.StaffID != StaffID)
+            if (Staff.StaffID != StaffID)
             {
                 OK = false;
             }
