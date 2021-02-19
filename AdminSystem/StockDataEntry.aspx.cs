@@ -42,4 +42,34 @@ public partial class StockDataEntry : System.Web.UI.Page
     }
 
 
+
+    protected void BtnFind_Click(object sender, EventArgs e)
+    {
+        //creates an instance of Stock class
+        clsStock AStock = new clsStock();
+
+        //variable to store the primary key
+        Int32 ProductID;
+
+        //variable to store the result of thew find operation
+        Boolean Found = false;
+
+        //get the primary key entered by the user 
+        ProductID = Convert.ToInt32(txtProductID.Text);
+
+        //find the record
+        Found = AStock.Find(ProductID);
+
+        //if found 
+        if (Found == true)
+        {
+            //display the values of the properties in the form 
+            txtProductID.Text = AStock.ProductID.ToString();
+            txtQuantity.Text = AStock.Quantity.ToString();
+            txtLocation.Text = AStock.Location;
+            txtPrice.Text = AStock.Price.ToString();
+            txtDateUpdated.Text = AStock.DateUpdated.ToString();
+
+        }
+    }
 }
