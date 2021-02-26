@@ -17,22 +17,46 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         // Create an instance of clsStaff.
         clsStaff Staff = new clsStaff();
-        // Capture the StaffID Property.
-        Staff.StaffID = int.Parse(txtStaffID.Text);
-        // Capture the StaffName Property.
-        Staff.StaffName = txtStaffName.Text;
-        // Capture the DateAccessed Property.
-        Staff.DateAccessed = Convert.ToDateTime(txtDateAccessed.Text);
-        // Capture the TotalCost Property.
-        Staff.TotalCost = double.Parse(txtTotalCost.Text);
-        // Capture the ProductID Property.
-        Staff.ProductID = int.Parse(txtProductID.Text);
-        // Capture the GrantAccess Property.
-        Staff.GrantAccess = chkGrantAccess.Checked;
-        // Store the Staff object in the session object.
-        Session["Staff"] = Staff;
-        // Navigate to the viewer page.
-        Response.Redirect("StaffViewer.aspx");
+
+        // Capture the Staff ID.
+        string StaffID = txtStaffID.Text;
+        // Capture the Staff Name.
+        string StaffName = txtStaffName.Text;
+        // Capture the Date accessed.
+        string DateAccessed = txtDateAccessed.Text;
+        // Capture the Total cost.
+        string TotalCost = txtTotalCost.Text;
+        // Capture the Grant access boolean.
+        string GrantAccess = chkGrantAccess.Checked.ToString();
+        // Capture the product ID.
+        string ProductID = txtProductID.Text;
+
+        // Variable to store any error messages.
+        string Error = "";
+        // Validate the data.
+        Error = Staff.Valid(StaffID, StaffName, DateAccessed, TotalCost, GrantAccess, ProductID);
+        if (Error == "")
+        {
+            // Capture the StaffID Property.
+            Staff.StaffID = int.Parse(txtStaffID.Text);
+            // Capture the StaffName Property.
+            Staff.StaffName = txtStaffName.Text;
+            // Capture the DateAccessed Property.
+            Staff.DateAccessed = Convert.ToDateTime(txtDateAccessed.Text);
+            // Capture the TotalCost Property.
+            Staff.TotalCost = double.Parse(txtTotalCost.Text);
+            // Capture the ProductID Property.
+            Staff.ProductID = int.Parse(txtProductID.Text);
+            // Capture the GrantAccess Property.
+            Staff.GrantAccess = chkGrantAccess.Checked;
+            // Store the Staff object in the session object.
+            Session["Staff"] = Staff;
+            // Navigate to the viewer page.
+            Response.Redirect("StaffViewer.aspx");
+        } else
+        {
+            lblError.Text = Error;
+        }
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
