@@ -139,9 +139,9 @@ namespace ClassLibrary
         
 
             //sets the private data members to the test data value of Product ID
-           //ProductID = 21;
-            //uantity = 10;
-            //ocation = "Factory Outlet";
+            //mProductID = 21;
+            //mQuantity = 10;
+            //mLocation = "Factory Outlet";
             //mPrice = 15.0;
             //mAvailability = true;
             //mDateUpdated = Convert.ToDateTime("12/02/2021");
@@ -150,6 +150,51 @@ namespace ClassLibrary
             //return true;
         }
 
-        
+        public string Valid(string productID, string quantity, string location, string price, string dateUpdated)
+        {
+            //creates a String variable to store the error 
+            String Error = "";
+            //creates a temporary DateTime variable to store date values
+            DateTime DateTemp;
+
+            //if the Location is blank
+            if (location.Length == 0)
+            {
+                //record the error 
+                Error = Error + "The location may not be blank :";
+            }
+            //if the Location is greater than 30 characters
+            if (location.Length > 30)
+            {
+                //record the error 
+                Error = Error + "The location must be greater than 30 characters :";
+            }
+
+            try
+            {
+                //copy the dateAdded value to the DateTemp variable
+                DateTemp = Convert.ToDateTime(dateUpdated);
+                if (DateTemp < DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date cannot be in the past : ";
+                }
+                //check to see if the date is greater than today's date
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date cannot be in the future : ";
+                }
+
+            }
+            catch
+            {
+                //record the error
+                Error = Error + "The date is not a valid date :";
+            }
+
+                //return any error messages 
+                return Error;
+        }
     }
 }
