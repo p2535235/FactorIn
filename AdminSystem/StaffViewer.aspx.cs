@@ -19,11 +19,11 @@ public partial class _1Viewer : System.Web.UI.Page
         Response.Write("<br>");
         Response.Write(Staff.StaffName);
         Response.Write("<br>");
-        Response.Write(Staff.DateAccessed);
+        Response.Write(Staff.DateOfBirth);
         Response.Write("<br>");
-        Response.Write(Staff.TotalCost);
+        Response.Write(Staff.Wage);
         Response.Write("<br>");
-        Response.Write(Staff.ProductID);
+        Response.Write(Staff.Email);
         Response.Write("<br>");
         Response.Write(Staff.GrantAccess);
         Response.Write("<br>");

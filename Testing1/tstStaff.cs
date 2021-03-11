@@ -11,10 +11,10 @@ namespace Testing1
         // Good test data.
         string staffID = "2";
         string staffName = "John";
-        string dateAccessed = DateTime.Today.Date.ToString();
-        string totalCost = "4.3";
+        string dateOfBirth = DateTime.Today.AddYears(-22).Date.ToString();
+        string wage = "4.3";
         string grantAccess = "False";
-        string productID = "1235";
+        string email = "email@example.com";
 
         [TestMethod]
         public void InstanceOK()
@@ -52,29 +52,29 @@ namespace Testing1
         }
 
         [TestMethod]
-        public void DateAccessedPropertyOK()
+        public void DateOfBirthPropertyOK()
         {
             // Instance of the Staff class.
             clsStaff Staff = new clsStaff();
-            // DateTime to be assigned to the DateAccessed property.
+            // DateTime to be assigned to the DateOfBirth property.
             DateTime TestData = DateTime.Now.Date;
             // Assign data to the property.
-            Staff.DateAccessed = TestData;
+            Staff.DateOfBirth = TestData;
             // Test to see if the two values are the same
-            Assert.AreEqual(Staff.DateAccessed, TestData);
+            Assert.AreEqual(Staff.DateOfBirth, TestData);
         }
 
         [TestMethod]
-        public void TotalCostPorpertyOK()
+        public void WagePorpertyOK()
         {
             // Instance of the Staff class.
             clsStaff Staff = new clsStaff();
-            // double to be assigned to the TotalCost property.
+            // double to be assigned to the Wage property.
             Double TestData = 1.32;
             // Assign data to the property.
-            Staff.TotalCost = TestData;
+            Staff.Wage = TestData;
             // Test to see if the two values are the same
-            Assert.AreEqual(Staff.TotalCost, TestData);
+            Assert.AreEqual(Staff.Wage, TestData);
         }
 
         [TestMethod]
@@ -91,16 +91,16 @@ namespace Testing1
         }
 
         [TestMethod]
-        public void ProductIDPropertyOK()
+        public void EmailPropertyOK()
         {
             // Instance of the Staff class.
             clsStaff Staff = new clsStaff();
             // int to be assigned to the ProductID property.
-            Int32 TestData = 0;
+            string TestData = "example@email.com";
             // Assign data to the property.
-            Staff.ProductID = TestData;
+            Staff.Email = TestData;
             // Test to see if the two values are the same
-            Assert.AreEqual(Staff.ProductID, TestData);
+            Assert.AreEqual(Staff.Email, TestData);
         }
 
         [TestMethod]
@@ -153,7 +153,7 @@ namespace Testing1
             String StaffName = "Boop";
             // Invoke the method.
             Found = Staff.Find(StaffName);
-            // Check if the provided StaffID is present
+            // Check if the provided staff name is present
             if (!Staff.StaffName.Equals(StaffName))
             {
                 OK = false;
@@ -163,7 +163,7 @@ namespace Testing1
         }
 
         [TestMethod]
-        public void TestDateAccessedFound()
+        public void TestDateOfBirthFound()
         {
             // Instance of the clsStaff Class.
             clsStaff Staff = new clsStaff();
@@ -172,11 +172,11 @@ namespace Testing1
             // Boolean to test if the data is ok (assume that it is).
             Boolean OK = true;
             // Test data to use with the method.
-            DateTime DateAccessed = Convert.ToDateTime("01/01/2020");
+            DateTime DateOfBirth = Convert.ToDateTime("01/01/2020");
             // Invoke the method.
-            Found = Staff.Find(DateAccessed);
-            // Check if the provided StaffID is present
-            if (Staff.DateAccessed != DateAccessed)
+            Found = Staff.Find(DateOfBirth);
+            // Check if the provided date of birth is present
+            if (Staff.DateOfBirth != DateOfBirth)
             {
                 OK = false;
             }
@@ -185,7 +185,7 @@ namespace Testing1
         }
 
         [TestMethod]
-        public void TestTotalCostFound()
+        public void TestWageFound()
         {
             // Instance of the clsStaff Class.
             clsStaff Staff = new clsStaff();
@@ -198,7 +198,7 @@ namespace Testing1
             // Invoke the method.
             Found = Staff.Find(TotalCost);
             // Check if the provided StaffID is present
-            if (Staff.TotalCost != TotalCost)
+            if (Staff.Wage != TotalCost)
             {
                 OK = false;
             }
@@ -219,7 +219,7 @@ namespace Testing1
             bool GrantAccess = true;
             // Invoke the method.
             Found = Staff.Find(GrantAccess);
-            // Check if the provided StaffID is present
+            // Check if the provided boolean is present
             if (Staff.GrantAccess != GrantAccess)
             {
                 OK = false;
@@ -235,7 +235,7 @@ namespace Testing1
             clsStaff staff = new clsStaff();
             // String method to store any error message.
             String Error = "";
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, grantAccess, email);
         }
 
 
@@ -249,7 +249,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffID = "";
             // Invoke Valid method.
-            Error = staff.Valid(StaffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
@@ -263,7 +263,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffID = "0";
             // Invoke Valid method.
-            Error = staff.Valid(StaffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
@@ -278,7 +278,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffID = "1";
             // Invoke Valid method.
-            Error = staff.Valid(StaffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             if(staff.Find(1)) Assert.AreEqual(Error, "The Staff ID must be unique : ");
             else Assert.AreEqual(Error, "");
@@ -294,7 +294,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffID = "2";
             // Invoke Valid method.
-            Error = staff.Valid(StaffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -309,7 +309,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffID = "2147483646";
             // Invoke Valid method.
-            Error = staff.Valid(StaffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -324,7 +324,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffID = "2147483647";
             // Invoke Valid method.
-            Error = staff.Valid(StaffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -339,7 +339,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffID = "2147483648";
             // Invoke Valid method.
-            Error = staff.Valid(StaffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
@@ -354,7 +354,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffID = "1073741823";
             // Invoke Valid method.
-            Error = staff.Valid(StaffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -369,7 +369,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffID = "2232147483647";
             // Invoke Valid method.
-            Error = staff.Valid(StaffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
@@ -384,7 +384,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffID = "Twenty";
             // Invoke Valid method.
-            Error = staff.Valid(StaffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
@@ -399,7 +399,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffID = "2";
             // Invoke Valid method.
-            Error = staff.Valid(StaffID, staffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -414,7 +414,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffName = "";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, StaffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, StaffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
@@ -429,7 +429,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffName = "O";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, StaffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, StaffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -444,7 +444,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffName = "Ol";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, StaffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, StaffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -459,7 +459,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffName = "Name goes here, akjhsdftgajkd";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, StaffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, StaffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -474,7 +474,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffName = "Name goes here, akjhsdftgajkda";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, StaffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, StaffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -489,7 +489,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffName = "Name goes here, akjhsdftgajkdas";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, StaffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, StaffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
@@ -504,7 +504,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffName = "Name goes here,";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, StaffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, StaffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -519,7 +519,7 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaawhyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaayouaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaareadingaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaathis?aaaaaaaaaaaaaaaaaaaaaaaaaaa";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, StaffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, StaffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
@@ -534,292 +534,292 @@ namespace Testing1
             // Test data to pass through the method.
             string StaffName = "Oh look, an invalid value: \"";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, StaffName, dateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, StaffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void DateAccessedExtremeMin()
+        public void DateOfBirthExtremeMin()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string DateAccessed = DateTime.Today.AddYears(-100).Date.ToString();
+            string DateOfBirth = DateTime.Today.AddYears(1000).Date.ToString();
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, DateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void DateAccessedMinMinusOne()
+        public void DateOfBirthMinMinusOne()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string DateAccessed = DateTime.Today.AddDays(-4).Date.ToString();
+            string DateOfBirth = DateTime.Today.AddYears(-12).Date.ToString();
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, DateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void DateAccessedMin()
+        public void DateOfBirthMin()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string DateAccessed = DateTime.Today.AddDays(-3).Date.ToString();
+            string DateOfBirth = DateTime.Today.AddYears(-13).Date.ToString();
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, DateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
-        public void DateAccessedMinPlusOne()
+        public void DateOfBirthMinPlusOne()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string DateAccessed = DateTime.Today.AddDays(-2).Date.ToString();
+            string DateOfBirth = DateTime.Today.AddYears(-14).Date.ToString();
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, DateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
-        public void DateAccessedMaxMinusOne()
+        public void DateOfBirthMaxMinusOne()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string DateAccessed = DateTime.Today.AddDays(-1).Date.ToString();
+            string DateOfBirth = DateTime.Today.AddYears(-149).Date.ToString();
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, DateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
-        public void DateAccessedMax()
+        public void DateOfBirthMax()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string DateAccessed = DateTime.Today.Date.ToString();
+            string DateOfBirth = DateTime.Today.AddYears(-150).Date.ToString();
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, DateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
-        public void DateAccessedMaxPlusOne()
+        public void DateOfBirthMaxPlusOne()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string DateAccessed = DateTime.Today.AddDays(1).Date.ToString();
+            string DateOfBirth = DateTime.Today.AddYears(-151).Date.ToString();
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, DateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void DateAccessedExtremeMax()
+        public void DateOfBirthExtremeMax()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string DateAccessed = DateTime.Today.AddYears(100).Date.ToString();
+            string DateOfBirth = DateTime.Today.AddYears(-1000).Date.ToString();
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, DateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void DateAccessed()
+        public void DateOfBirth()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string DateAccessed = "Today";
+            string DateOfBirth = "Today";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, DateAccessed, totalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void TotalCostExtremeMin()
+        public void WageExtremeMin()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string TotalCost = "-1000.1234";
+            string Wage = "-1000.1234";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, TotalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, Wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void TotalCostMinMinusOne()
+        public void WageMinMinusOne()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string TotalCost = "-1";
+            string Wage = "3.15";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, TotalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, Wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void TotalCostMin()
+        public void WageMin()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string TotalCost = "0";
+            string Wage = "4.15";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, TotalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, Wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
-        public void TotalCostMinPlusOne()
+        public void WageMinPlusOne()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string TotalCost = "1";
+            string Wage = "5.15";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, TotalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, Wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
-        public void TotalCostMaxMinusOne()
+        public void WageMaxMinusOne()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string TotalCost = "999999999999999.99";
+            string Wage = "99999999999";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, TotalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, Wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
-        public void TotalCostMax()
+        public void WageMax()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string TotalCost = "1000000000000000.99";
+            string Wage = "100000000000";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, TotalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, Wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
-        public void TotalCostMaxPlusOne()
+        public void WageMaxPlusOne()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string TotalCost = "1000000000000001.99";
+            string Wage = "100000000001";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, TotalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, Wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void TotalCostMid()
+        public void WageMid()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string TotalCost = "50000000";
+            string Wage = "5000000";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, TotalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, Wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
-        public void TotalCostExtremeMax()
+        public void WageExtremeMax()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string TotalCost = "99999999999999999.34657456";
+            string Wage = "99999999999999999.34657456";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, TotalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, Wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void TotalCostInvalidVal()
+        public void WageInvalidVal()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string TotalCost = "Seventy Five Dollars";
+            string Wage = "Seventy Five Dollars";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, TotalCost, grantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, Wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
@@ -834,7 +834,7 @@ namespace Testing1
             // Test data to pass through the method.
             string GrantAccess = "True";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, GrantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, GrantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -849,7 +849,7 @@ namespace Testing1
             // Test data to pass through the method.
             string GrantAccess = "False";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, GrantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, GrantAccess, email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
@@ -864,174 +864,144 @@ namespace Testing1
             // Test data to pass through the method.
             string GrantAccess = "This is true";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, GrantAccess, productID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, GrantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void ProductIDExtremeMin()
+        public void EmailMinMinusOne()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string ProductID = "-50";
+            string Email = "e@f.";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, ProductID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, grantAccess, Email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void ProductIDMinMinusOne()
+        public void EmailMin()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string ProductID = "0";
+            string Email = "e@f.uk";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, ProductID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, grantAccess, Email);
+            // Test to see if the results are correct.
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailMinPlusOne()
+        {
+            // Create an instance of the Staff class.
+            clsStaff staff = new clsStaff();
+            // String to store any error messages.
+            String Error = "";
+            // Test data to pass through the method.
+            string Email = "e@f.com";
+            // Invoke Valid method.
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, grantAccess, Email);
+            // Test to see if the results are correct.
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailMaxMinusOne()
+        {
+            // Create an instance of the Staff class.
+            clsStaff staff = new clsStaff();
+            // String to store any error messages.
+            String Error = "";
+            // Test data to pass through the method.
+            string Email = "example.fmglfdsasde@email.com";
+            // Invoke Valid method.
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, grantAccess, Email);
+            // Test to see if the results are correct.
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailMax()
+        {
+            // Create an instance of the Staff class.
+            clsStaff staff = new clsStaff();
+            // String to store any error messages.
+            String Error = "";
+            // Test data to pass through the method.
+            string Email = "example.fmglfdsasade@email.com";
+            // Invoke Valid method.
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, grantAccess, Email);
+            // Test to see if the results are correct.
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailMaxPlusOne()
+        {
+            // Create an instance of the Staff class.
+            clsStaff staff = new clsStaff();
+            // String to store any error messages.
+            String Error = "";
+            // Test data to pass through the method.
+            string Email = "example.fmgsddfdsasde@email.com";
+            // Invoke Valid method.
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, grantAccess, Email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void ProductIDMin()
+        public void EmailMid()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string ProductID = "1";
+            string Email = "examp@email.com";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, ProductID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, grantAccess, Email);
             // Test to see if the results are correct.
             Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
-        public void ProductIDMinPlusOne()
+        public void EmailExtremeMax()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string ProductID = "2";
+            string Email = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH@AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHH.ugh";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, ProductID);
-            // Test to see if the results are correct.
-            Assert.AreEqual(Error, "");
-        }
-
-        [TestMethod]
-        public void ProductIDMaxMinusOne()
-        {
-            // Create an instance of the Staff class.
-            clsStaff staff = new clsStaff();
-            // String to store any error messages.
-            String Error = "";
-            // Test data to pass through the method.
-            string ProductID = "2147483646";
-            // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, ProductID);
-            // Test to see if the results are correct.
-            Assert.AreEqual(Error, "");
-        }
-
-        [TestMethod]
-        public void ProductIDMax()
-        {
-            // Create an instance of the Staff class.
-            clsStaff staff = new clsStaff();
-            // String to store any error messages.
-            String Error = "";
-            // Test data to pass through the method.
-            string ProductID = "2147483647";
-            // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, ProductID);
-            // Test to see if the results are correct.
-            Assert.AreEqual(Error, "");
-        }
-
-        [TestMethod]
-        public void ProductIDMaxPlusOne()
-        {
-            // Create an instance of the Staff class.
-            clsStaff staff = new clsStaff();
-            // String to store any error messages.
-            String Error = "";
-            // Test data to pass through the method.
-            string ProductID = "2147483648";
-            // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, ProductID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, grantAccess, Email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
-        public void ProductIDMid()
+        public void EmailInvalidVal()
         {
             // Create an instance of the Staff class.
             clsStaff staff = new clsStaff();
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string ProductID = "1073741823";
+            string Email = "email";
             // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, ProductID);
-            // Test to see if the results are correct.
-            Assert.AreEqual(Error, "");
-        }
-
-        [TestMethod]
-        public void ProductIDExtremeMax()
-        {
-            // Create an instance of the Staff class.
-            clsStaff staff = new clsStaff();
-            // String to store any error messages.
-            String Error = "";
-            // Test data to pass through the method.
-            string ProductID = "2122147483648";
-            // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, ProductID);
+            Error = staff.Valid(staffID, staffName, dateOfBirth, wage, grantAccess, Email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
-        }
-
-        [TestMethod]
-        public void ProductIDInvalidVal()
-        {
-            // Create an instance of the Staff class.
-            clsStaff staff = new clsStaff();
-            // String to store any error messages.
-            String Error = "";
-            // Test data to pass through the method.
-            string ProductID = "One hundred and five";
-            // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, ProductID);
-            // Test to see if the results are correct.
-            Assert.AreNotEqual(Error, "");
-        }
-
-        [TestMethod]
-        public void ProductIDIsInStockTable()
-        {
-            // Create an instance of the Staff class.
-            clsStaff staff = new clsStaff();
-            // String to store any error messages.
-            String Error = "";
-            // Test data to pass through the method.
-            string ProductID = "1236";
-            // Invoke Valid method.
-            Error = staff.Valid(staffID, staffName, dateAccessed, totalCost, grantAccess, ProductID);
-            // Test to see if the results are correct.
-            Assert.AreEqual(Error, "");
         }
     }
 }

@@ -20,15 +20,15 @@
             </div>
             <div>
                 <asp:Label ID="lblDateAccessed" runat="server" Text="Date Accessed" width="180px"></asp:Label>
-                <asp:TextBox ID="txtDateAccessed" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtDateOfBirth" runat="server"></asp:TextBox>
             </div>
             <div>
                 <asp:Label ID="lblTotalCost" runat="server" Text="Total Cost" width="180px"></asp:Label>
-                <asp:TextBox ID="txtTotalCost" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtWage" runat="server"></asp:TextBox>
             </div>
             <div>
                 <asp:Label ID="lblProductID" runat="server" Text="Product ID" width="180px"></asp:Label>
-                <asp:TextBox ID="txtProductID" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
             </div>
             <div>
                 <asp:CheckBox ID="chkGrantAccess" runat="server" Text="Grant Access" />

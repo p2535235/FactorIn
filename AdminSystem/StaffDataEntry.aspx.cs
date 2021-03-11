@@ -22,19 +22,19 @@ public partial class _1_DataEntry : System.Web.UI.Page
         string StaffID = txtStaffID.Text;
         // Capture the Staff Name.
         string StaffName = txtStaffName.Text;
-        // Capture the Date accessed.
-        string DateAccessed = txtDateAccessed.Text;
-        // Capture the Total cost.
-        string TotalCost = txtTotalCost.Text;
+        // Capture the date of birth.
+        string DateOfBirth = txtDateOfBirth.Text;
+        // Capture the wage.
+        string Wage = txtWage.Text;
         // Capture the Grant access boolean.
         string GrantAccess = chkGrantAccess.Checked.ToString();
-        // Capture the product ID.
-        string ProductID = txtProductID.Text;
+        // Capture the email.
+        string Email = txtEmail.Text;
 
         // Variable to store any error messages.
         string Error = "";
         // Validate the data.
-        Error = Staff.Valid(StaffID, StaffName, DateAccessed, TotalCost, GrantAccess, ProductID);
+        Error = Staff.Valid(StaffID, StaffName, DateOfBirth, Wage, GrantAccess, Email);
         if (Error == "")
         {
             // Capture the StaffID Property.
@@ -42,11 +42,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
             // Capture the StaffName Property.
             Staff.StaffName = txtStaffName.Text;
             // Capture the DateAccessed Property.
-            Staff.DateAccessed = Convert.ToDateTime(txtDateAccessed.Text);
+            Staff.DateOfBirth = Convert.ToDateTime(txtDateOfBirth.Text);
             // Capture the TotalCost Property.
-            Staff.TotalCost = double.Parse(txtTotalCost.Text);
+            Staff.Wage = double.Parse(txtWage.Text);
             // Capture the ProductID Property.
-            Staff.ProductID = int.Parse(txtProductID.Text);
+            Staff.Email = txtEmail.Text;
             // Capture the GrantAccess Property.
             Staff.GrantAccess = chkGrantAccess.Checked;
             // Store the Staff object in the session object.
@@ -77,9 +77,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
         {
             // Display the values of the properties in the form.
             txtStaffName.Text = staff.StaffName;
-            txtDateAccessed.Text = staff.DateAccessed.ToString();
-            txtTotalCost.Text = staff.TotalCost.ToString();
-            txtProductID.Text = staff.ProductID.ToString();
+            txtDateOfBirth.Text = staff.DateOfBirth.ToString();
+            txtWage.Text = staff.Wage.ToString();
+            txtEmail.Text = staff.Email.ToString();
             chkGrantAccess.Checked = staff.GrantAccess;
         }
     }

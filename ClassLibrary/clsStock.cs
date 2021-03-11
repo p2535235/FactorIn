@@ -116,7 +116,7 @@ namespace ClassLibrary
             DB.Execute("sproc_tblStock_FilterByProductID");
 
             //if one record is found
-            if (DB.Count == 1)
+            if (DB.Count == 2)
             {
                 //copy the data from the database to the private data members
                 mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);

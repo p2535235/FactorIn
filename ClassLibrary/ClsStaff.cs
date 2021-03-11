@@ -7,9 +7,9 @@ namespace ClassLibrary
         // Private data member for the respective properties.
         private int staffID;
         private string staffName;
-        private DateTime dateAccessed;
-        private double totalCost;
-        private int productID;
+        private DateTime dateOfBirth;
+        private double wage;
+        private string email;
         private bool grantAccess;
 
         // StaffID public property.
@@ -26,17 +26,17 @@ namespace ClassLibrary
                 staffID = value;
             }
         }
-        public int ProductID
+        public string Email
         {
             get
             {
                 // Returns the staffID variable.
-                return productID;
+                return email;
             }
             set
             {
                 // Assigns the value to the staffID variable.
-                productID = value;
+                email = value;
             }
         }
         public string StaffName
@@ -52,30 +52,30 @@ namespace ClassLibrary
                 staffName = value;
             }
         }
-        public DateTime DateAccessed
+        public DateTime DateOfBirth
         {
             get
             {
                 // Returns the staffID variable.
-                return dateAccessed;
+                return dateOfBirth;
             }
             set
             {
                 // Assigns the value to the staffID variable.
-                dateAccessed = value;
+                dateOfBirth = value;
             }
         }
-        public double TotalCost
+        public double Wage
         {
             get
             {
                 // Returns the staffID variable.
-                return totalCost;
+                return wage;
             }
             set
             {
                 // Assigns the value to the staffID variable.
-                totalCost = value;
+                wage = value;
             }
         }
         public bool GrantAccess
@@ -108,12 +108,10 @@ namespace ClassLibrary
                 // Assign the field variables the corresponding columns.
                 staffID = Convert.ToInt32(DB.DataTable.Rows[0]["StaffID"]);
                 staffName = Convert.ToString(DB.DataTable.Rows[0]["StaffName"]);
-                dateAccessed = Convert.ToDateTime(DB.DataTable.Rows[0]["DateAccessed"]);
-                totalCost = Convert.ToDouble(DB.DataTable.Rows[0]["TotalCost"]);
+                dateOfBirth = Convert.ToDateTime(DB.DataTable.Rows[0]["DOB"]);
+                wage = Convert.ToDouble(DB.DataTable.Rows[0]["Wage"]);
                 grantAccess = Convert.ToBoolean(DB.DataTable.Rows[0]["GrantAccess"]);
-
-                if (DB.DataTable.Rows[0]["ProductID"] == DBNull.Value) productID = 0;
-                else productID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
+                email = Convert.ToString(DB.DataTable.Rows[0]["Email"]);
 
                 // Return true.
                 return true;
@@ -133,13 +131,13 @@ namespace ClassLibrary
 
         public bool Find(DateTime DateAccessed)
         {
-            dateAccessed = Convert.ToDateTime("01/01/2020");
+            dateOfBirth = Convert.ToDateTime("01/01/2020");
             return true;
         }
 
         public bool Find(double TotalCost)
         {
-            totalCost = 2.2;
+            wage = 2.2;
             return true;
         }
 
@@ -156,7 +154,7 @@ namespace ClassLibrary
             return true;
         }*/
 
-        public String Valid(string staffID, string staffName, string dateAccessed, string totalCost, string grantAccess, string productID)
+        public String Valid(string staffID, string staffName, string dateOfBirth, string wage, string grantAccess, string email)
         {
             // Create a string variable to store the error(s).
             String Error = "";
@@ -190,11 +188,11 @@ namespace ClassLibrary
             try
             {
                 // DateTime variable to store the date accessed.
-                DateTime date = DateTime.Parse(dateAccessed);
+                DateTime date = DateTime.Parse(dateOfBirth);
 
                 // If the Date is within bounds.
-                if (date.Date.CompareTo(DateTime.Today.AddDays(-3).Date) < 0) Error += "The date accessed must be recorded within a 72 hours of accessing the factory : ";
-                if (date.Date.CompareTo(DateTime.Today.Date) > 0) Error += "The date accessed must not exceed todays date. : ";
+                if (date.Date.CompareTo(DateTime.Today.AddYears(-13)) > 0) Error += "The employee must be at least 13 years old : ";
+                if (date.Date.CompareTo(DateTime.Today.AddYears(-150)) < 0) Error += "The employee must be no older than 150 years old : ";
             } catch
             {
                 Error += "The date must be in the format of: \"DD/MM/YYYY\" : ";
@@ -202,15 +200,15 @@ namespace ClassLibrary
 
             try
             {
-                // Double variable to store the cost.
-                Double cost = Double.Parse(totalCost);
+                // Double variable to store the emloyeeWage.
+                Double emloyeeWage = Double.Parse(wage);
 
                 // If the variable is within bounds.
-                if (cost > 1000000000000000.99) Error += "Cost must not exceed 1000000000000000.99 : ";
-                if (cost < 0) Error += "Cost must no lower than 0 : ";
+                if (emloyeeWage > 100000000000) Error += "The wage must not exceed 100000000000 : ";
+                if (emloyeeWage < 4.15) Error += "The wage must no lower than 4.15 : ";
             } catch
             {
-                Error += "invalid value, must be a decimal number of atleast 0 and no greater than 1000000000000000.99 : ";
+                Error += "Invalid value, must be a decimal number of atleast 4.15 and no greater than 100000000000 : ";
             }
 
             try
@@ -222,23 +220,8 @@ namespace ClassLibrary
                 Error += "Value must be either True, False, 1, or 0 : ";
             }
 
-            try
-            {
-                // Int for storing the Product ID.
-                int ID = Int32.Parse(productID);
-
-                // clsStock for finding the relevant product in stock.
-                clsStock stock = new clsStock();
-
-                // If the Product ID is negative or zero or is not in the stock table
-                if (ID < 1) Error += "Product ID must be greater than 0 : ";
-                // This cannot be implemented until clsStock's Find method is fully operational.
-                //if (!stock.Find(ID)) Error += "The product ID must exist.";
-
-            } catch
-            {
-                Error += "Product ID must be a valid integer : ";
-            }
+            // If the email is valid.
+            if (!email.Contains("@") || email.Length < 5 || email.Length > 30) Error += "Invalid email : ";
 
             // Return any error messages.
             return Error;
