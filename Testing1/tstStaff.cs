@@ -547,7 +547,7 @@ namespace tstStaffCollection
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string DateOfBirth = DateTime.Today.AddYears(1000).Date.ToString();
+            string DateOfBirth = DateTime.Today.Date.ToString();
             // Invoke Valid method.
             Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
@@ -642,6 +642,21 @@ namespace tstStaffCollection
             Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
             Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateOfBirthMid()
+        {
+            // Create an instance of the Staff class.
+            clsStaff staff = new clsStaff();
+            // String to store any error messages.
+            String Error = "";
+            // Test data to pass through the method.
+            string DateOfBirth = DateTime.Today.AddYears(-75).Date.ToString();
+            // Invoke Valid method.
+            Error = staff.Valid(staffID, staffName, DateOfBirth, wage, grantAccess, email);
+            // Test to see if the results are correct.
+            Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
@@ -787,7 +802,7 @@ namespace tstStaffCollection
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string Wage = "5000000";
+            string Wage = "50000000000";
             // Invoke Valid method.
             Error = staff.Valid(staffID, staffName, dateOfBirth, Wage, grantAccess, email);
             // Test to see if the results are correct.
@@ -982,7 +997,7 @@ namespace tstStaffCollection
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string Email = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHH@AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHH.ugh";
+            string Email = "AAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHH@AAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHH.ugh";
             // Invoke Valid method.
             Error = staff.Valid(staffID, staffName, dateOfBirth, wage, grantAccess, Email);
             // Test to see if the results are correct.
