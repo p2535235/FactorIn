@@ -66,5 +66,69 @@ namespace tstStaffCollection
             // Test to see that the two values are the same.
             Assert.AreEqual(AllStaff.Count, TestList.Count);
         }
+
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            // Create an instance of the class.
+            clsStaffCollection AllStaff = new clsStaffCollection();
+            // Create the test data.
+            clsStaff TestItem = new clsStaff();
+            // Var to store the primary key.
+            Int32 PrimaryKey = 0;
+            // Set its properties.
+            TestItem.StaffName = "Bob";
+            TestItem.Wage = 72.4;
+            TestItem.GrantAccess = true;
+            TestItem.DateOfBirth = DateTime.Now.AddYears(-60);
+            TestItem.Email = "bob@gmail.com";
+            // Set the current staff to the test object.
+            AllStaff.CurrentStaff = TestItem;
+            // Add the record.
+            PrimaryKey = AllStaff.Add();
+            // Set the primary key of the test data.
+            TestItem.StaffID = PrimaryKey;
+            // Find the record.
+            AllStaff.CurrentStaff.Find(PrimaryKey);
+            // Test to see the two values are the same.
+            Assert.AreEqual(AllStaff.CurrentStaff, TestItem);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            // Create an instance of the class.
+            clsStaffCollection AllStaff = new clsStaffCollection();
+            // Create the test data.
+            clsStaff TestItem = new clsStaff();
+            // Var to store the primary key.
+            Int32 PrimaryKey = 0;
+            // Set its properties.
+            TestItem.StaffName = "Bob";
+            TestItem.Wage = 72.4;
+            TestItem.GrantAccess = true;
+            TestItem.DateOfBirth = DateTime.Now.AddYears(-60);
+            TestItem.Email = "bob@gmail.com";
+            // Set the current staff to the test object.
+            AllStaff.CurrentStaff = TestItem;
+            // Add the record.
+            PrimaryKey = AllStaff.Add();
+            // Set the primary key of the test data.
+            TestItem.StaffID = PrimaryKey;
+            // modify the test data.
+            TestItem.StaffName = "Bobby";
+            TestItem.Wage = 72.4;
+            TestItem.GrantAccess = true;
+            TestItem.DateOfBirth = DateTime.Now.AddYears(-60);
+            TestItem.Email = "bobby@gmail.com";
+            // Set the record based on the new test data.
+            AllStaff.CurrentStaff = TestItem;
+            // Update the record.
+            AllStaff.Update();
+            // Find the record.
+            AllStaff.CurrentStaff.Find(PrimaryKey);
+            // Test to see if the currentStaff matches the TestItem.
+            Assert.AreEqual(AllStaff.CurrentStaff, TestItem);
+        }
     }
 }

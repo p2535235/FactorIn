@@ -9,7 +9,7 @@ namespace tstStaffCollection
     {
 
         // Good test data.
-        string staffID = "2";
+        string staffID = "3";
         string staffName = "John";
         string dateOfBirth = DateTime.Today.AddYears(-22).Date.ToString();
         string wage = "4.3";
@@ -292,7 +292,7 @@ namespace tstStaffCollection
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string StaffID = "2";
+            string StaffID = "3";
             // Invoke Valid method.
             Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.
@@ -397,7 +397,7 @@ namespace tstStaffCollection
             // String to store any error messages.
             String Error = "";
             // Test data to pass through the method.
-            string StaffID = "2";
+            string StaffID = "3";
             // Invoke Valid method.
             Error = staff.Valid(StaffID, staffName, dateOfBirth, wage, grantAccess, email);
             // Test to see if the results are correct.

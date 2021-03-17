@@ -147,13 +147,6 @@ namespace ClassLibrary
             return true;
         }
 
-        // This cannot be implemented.
-        /*public bool Find(int ProductID)
-        {
-            staffID = 34;
-            return true;
-        }*/
-
         public String Valid(string staffID, string staffName, string dateOfBirth, string wage, string grantAccess, string email)
         {
             // Create a string variable to store the error(s).

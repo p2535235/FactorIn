@@ -8,6 +8,13 @@ namespace ClassLibrary
 {
     public class clsStaffCollection
     {
+        // Private data type for the list.
+        List<clsStaff> mStaffList = new List<clsStaff>();
+        // Private data type.
+        clsStaff mStaff = new clsStaff();
+
+        int count;
+
         public clsStaffCollection()
         {
             // Var to store the record count.
@@ -35,10 +42,6 @@ namespace ClassLibrary
                 mStaffList.Add(staff);
             }
         }
-
-        // Private data type for the list.
-        List<clsStaff> mStaffList = new List<clsStaff>();
-        int count;
 
         // Public property for the staff list.
         public List<clsStaff> StaffList
@@ -69,6 +72,52 @@ namespace ClassLibrary
             {
 
             }
+        }
+
+        public clsStaff CurrentStaff
+        {
+            get
+            {
+                // Return current staff.
+                return mStaff;
+            }
+
+            set
+            {
+                // Set the current staff.
+                mStaff = value;
+            }
+        }
+
+        public int Add()
+        {
+            // Adds a new record to the database based on the values of mStaff.
+            // Conect to the database.
+            clsDataConnection DB = new clsDataConnection();
+            // Set the parameters for the stored procedure.
+            DB.AddParameter("@StaffName", mStaff.StaffName);
+            DB.AddParameter("@DOB", mStaff.DateOfBirth);
+            DB.AddParameter("@Wage", mStaff.Wage);
+            DB.AddParameter("@Email", mStaff.Email);
+            DB.AddParameter("@GrantAccess", mStaff.GrantAccess);
+            // Execute the query return the primary key value.
+            return DB.Execute("sproc_tblStaff_Insert");
+        }
+
+        public void Update()
+        {
+            // Update an existing record based on the values of the currentStaff.
+            // Connect to the database.
+            clsDataConnection DB = new clsDataConnection();
+            // Set the parameters for the stored procedure.
+            DB.AddParameter("@StaffID", mStaff.StaffID);
+            DB.AddParameter("@StaffName", mStaff.StaffName);
+            DB.AddParameter("@DOB", mStaff.DateOfBirth);
+            DB.AddParameter("@Wage", mStaff.Wage);
+            DB.AddParameter("@Email", mStaff.Email);
+            DB.AddParameter("@GrantAccess", mStaff.GrantAccess);
+            // Execute the query return the primary key value.
+            DB.Execute("sproc_tblStaff_Update");
         }
     }
 }

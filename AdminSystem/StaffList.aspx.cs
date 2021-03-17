@@ -32,4 +32,35 @@ public partial class _1_List : System.Web.UI.Page
         // Bind the data to the list.
         lstStaffList.DataBind();
     }
+
+    // Event handler for the add button.
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        // Store -1 into the session object to indicate this is a new record.
+        Session["StaffID"] = -1;
+        // Redirect to the data entry page.
+        Response.Redirect("StaffDataEntry.aspx");
+    }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        // Var to store the primary key of the record to be edited.
+        Int32 StaffID;
+        // If a record has been selected from the list.
+        if (lstStaffList.SelectedIndex != -1)
+        {
+            // Get the primary key value of the record to edit.
+            StaffID = Convert.ToInt32(lstStaffList.SelectedValue);
+            // Store the data in the session object.
+            Session["StaffID"] = StaffID;
+            // Redirect to the edit page.
+            Response.Redirect("StaffDataEntry.aspx");
+        }
+        else // If no record has been selected.
+        {
+            // Display an error.,
+            lblError.Text = "Please select a record to edit.";
+        }
+        
+    }
 }
