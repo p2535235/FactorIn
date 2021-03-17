@@ -19,15 +19,15 @@
                 <asp:TextBox ID="txtStaffName" runat="server"></asp:TextBox>
             </div>
             <div>
-                <asp:Label ID="lblDateAccessed" runat="server" Text="Date Accessed" width="180px"></asp:Label>
+                <asp:Label ID="lblDateOfBirth" runat="server" Text="Date of Birth" width="180px"></asp:Label>
                 <asp:TextBox ID="txtDateOfBirth" runat="server"></asp:TextBox>
             </div>
             <div>
-                <asp:Label ID="lblTotalCost" runat="server" Text="Total Cost" width="180px"></asp:Label>
+                <asp:Label ID="lblWage" runat="server" Text="Wage" width="180px"></asp:Label>
                 <asp:TextBox ID="txtWage" runat="server"></asp:TextBox>
             </div>
             <div>
-                <asp:Label ID="lblProductID" runat="server" Text="Product ID" width="180px"></asp:Label>
+                <asp:Label ID="lblEmail" runat="server" Text="Email" width="180px"></asp:Label>
                 <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
             </div>
             <div>

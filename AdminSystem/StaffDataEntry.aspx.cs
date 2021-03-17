@@ -8,9 +8,37 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    // Int32 to store the primary key within the page level scope.
+    Int32 StaffID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Get the number of staff members to be processed.
+        StaffID = Convert.ToInt32(Session["StaffID"]);
 
+        if(IsPostBack == false)
+        {
+            // If this is not a new record.
+            if(StaffID != -1)
+            {
+                // Display the current data for the record.
+                DisplayAddress();
+            }
+        }
+    }
+    
+    void DisplayAddress()
+    {
+        // Create an instance of the address book.
+        clsStaffCollection StaffMembers = new clsStaffCollection();
+        // Find the record to update.
+        StaffMembers.CurrentStaff.Find(StaffID);
+        // Display the data for this record.
+        txtStaffID.Text = StaffMembers.CurrentStaff.StaffID.ToString();
+        txtStaffName.Text = StaffMembers.CurrentStaff.StaffName;
+        txtDateOfBirth.Text = StaffMembers.CurrentStaff.DateOfBirth.ToString();
+        txtWage.Text = StaffMembers.CurrentStaff.Wage.ToString();
+        txtEmail.Text = StaffMembers.CurrentStaff.Email;
+        chkGrantAccess.Checked = StaffMembers.CurrentStaff.GrantAccess;
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -38,7 +66,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Error == "")
         {
             // Capture the StaffID Property.
-            Staff.StaffID = int.Parse(txtStaffID.Text);
+            Staff.StaffID = StaffID;
             // Capture the StaffName Property.
             Staff.StaffName = txtStaffName.Text;
             // Capture the DateAccessed Property.
@@ -49,11 +77,32 @@ public partial class _1_DataEntry : System.Web.UI.Page
             Staff.Email = txtEmail.Text;
             // Capture the GrantAccess Property.
             Staff.GrantAccess = chkGrantAccess.Checked;
-            // Store the Staff object in the session object.
-            Session["Staff"] = Staff;
-            // Navigate to the viewer page.
-            Response.Redirect("StaffViewer.aspx");
-        } else
+            // Create a new instance of the address collection.
+            clsStaffCollection staffList = new clsStaffCollection();
+
+            // If this is a new record then add the data.
+            if(this.StaffID == -1)
+            {
+                // Set the currentStaff property.
+                staffList.CurrentStaff = Staff;
+                // Add the new record.
+                staffList.Add();
+            } else // Otherwise update.
+            {
+                // Find the record to update.
+                staffList.CurrentStaff.Find(StaffID);
+                // Set the currentStaff property.
+                staffList.CurrentStaff = Staff;
+                // Update the record.
+                staffList.Update();
+            }
+
+            // Redirect back to the listpage.
+            Response.Redirect("StaffList.aspx");
+            // Redirect back to the list page.
+            Response.Redirect("StaffList.aspx");
+
+        } else // Else display error message.
         {
             lblError.Text = Error;
         }
