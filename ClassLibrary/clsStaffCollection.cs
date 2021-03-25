@@ -23,8 +23,8 @@ namespace ClassLibrary
             clsDataConnection DB = new clsDataConnection();
             // Execute the stored procedure.
             DB.Execute("sproc_tblStaff_SelectAll");
-            // Get the count of records.
-            RecordCount = DB.Count;
+            // Populate the array list with the data table.
+            populateArray(DB);
 
             // For loop to iterate to each record in the database.
             for(Int32 i = 0; i < RecordCount; i++)
@@ -118,6 +118,54 @@ namespace ClassLibrary
             DB.AddParameter("@GrantAccess", mStaff.GrantAccess);
             // Execute the query return the primary key value.
             DB.Execute("sproc_tblStaff_Update");
+        }
+
+        public void Delete()
+        {
+            // Deletes the record pointed to by the currentStaff.
+            // Connect to the database.
+            clsDataConnection DB = new clsDataConnection();
+            // Set the parameters for the stored procedure.
+            DB.AddParameter("@StaffID", CurrentStaff.StaffID);
+            // Execute the stored procedure.
+            DB.Execute("sproc_tblStaff_Delete");
+        }
+
+        public void ReportByStaffName(string StaffName)
+        {
+            // Filters the records based on a full or partial staff name.
+            // Connect to the database.
+            clsDataConnection DB = new clsDataConnection();
+            // Send the Staff name parameter to the database.
+            DB.AddParameter("@StaffName", StaffName);
+            // Execute the procedure.
+            DB.Execute("sproc_tblStaff_FilterByStaffName");
+            // Populate the array list with the data table.
+            populateArray(DB);
+        }
+
+        void populateArray(clsDataConnection DB)
+        {
+            // Populates the array list based on the data table in the parameter DB.
+            // Var to store the record count.
+            Int32 RecordCount = DB.Count;
+            // Clear the array list.
+            mStaffList = new List<clsStaff>();
+            // Iterate through the records.
+            for(Int32 i = 0; i < RecordCount; i++)
+            {
+                // Create a blank address.
+                clsStaff Staff = new clsStaff();
+                // Set the fields from the current records.
+                Staff.StaffID = Convert.ToInt32(DB.DataTable.Rows[i]["StaffID"]);
+                Staff.StaffName = Convert.ToString(DB.DataTable.Rows[i]["StaffName"]);
+                Staff.Wage = Convert.ToInt32(DB.DataTable.Rows[i]["Wage"]);
+                Staff.DateOfBirth = Convert.ToDateTime(DB.DataTable.Rows[i]["DOB"]);
+                Staff.Email = Convert.ToString(DB.DataTable.Rows[i]["Email"]);
+                Staff.GrantAccess = Convert.ToBoolean(DB.DataTable.Rows[i]["GrantAccess"]);
+                // Add the record to the list.
+                mStaffList.Add(Staff);
+            }
         }
     }
 }

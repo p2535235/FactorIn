@@ -66,7 +66,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Error == "")
         {
             // Capture the StaffID Property.
-            Staff.StaffID = StaffID;
+            Staff.StaffID = Convert.ToInt32(StaffID);
             // Capture the StaffName Property.
             Staff.StaffName = txtStaffName.Text;
             // Capture the DateAccessed Property.
