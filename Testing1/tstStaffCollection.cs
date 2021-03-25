@@ -130,5 +130,57 @@ namespace tstStaffCollection
             // Test to see if the currentStaff matches the TestItem.
             Assert.AreEqual(AllStaff.CurrentStaff, TestItem);
         }
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            // Create an instance of the class.
+            clsStaffCollection AllStaff = new clsStaffCollection();
+            // Create the test data.
+            clsStaff TestItem = new clsStaff();
+            // Var to store the primary key.
+            Int32 PrimaryKey = 0;
+            // Set its properties.
+            TestItem.StaffName = "Bob";
+            TestItem.Wage = 72.4;
+            TestItem.GrantAccess = true;
+            TestItem.DateOfBirth = DateTime.Now.AddYears(-60);
+            TestItem.Email = "bob@gmail.com";
+            // Set the current staff to the test object.
+            AllStaff.CurrentStaff = TestItem;
+            // Add the record.
+            PrimaryKey = AllStaff.Add();
+            // Set the primary key of the test data.
+            TestItem.StaffID = PrimaryKey;
+            // Find the record.
+            AllStaff.CurrentStaff.Find(PrimaryKey);
+            // Delete the record.
+            AllStaff.Delete();
+            // Find the record.
+            Boolean Found = AllStaff.CurrentStaff.Find(PrimaryKey);
+            // Test to see that the record was not found.
+            Assert.IsFalse(Found);
+        }
+
+        [TestMethod]
+        public void ReportByStaffNameFound()
+        {
+            // Create an instance of the filtered data.
+            clsStaffCollection FilteredStaff = new clsStaffCollection();
+            // Var to store the outcome.
+            Boolean OK = true;
+            // Apply a Staff Name that doesn't exist.
+            FilteredStaff.ReportByStaffName("Foo Bar");
+            // Check that the correct number of records are found.
+            if (FilteredStaff.Count == 2)
+            {
+                // Check if the Staff ID's of the records are 2 and 3 respectively.
+                if (FilteredStaff.StaffList[0].StaffID != 2) OK = false;
+                if (FilteredStaff.StaffList[1].StaffID != 3) OK = false;
+            }
+            else OK = false;
+            // Test to see that there are no records.
+            Assert.IsTrue(OK);
+        }
     }
 }
