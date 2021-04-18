@@ -8,7 +8,7 @@ namespace ClassLibrary
         private Int32 mProductID;
         //ProductID public property
         public int ProductID
-        {
+        { 
             get
             {
                 //sends data out of this property
@@ -110,13 +110,14 @@ namespace ClassLibrary
         {
             //create an instance of the data connection
             clsDataConnection DB = new clsDataConnection();
+
             //add the parameter for the product id to search for 
             DB.AddParameter("@ProductID", ProductID);
             //execute the stored procedure
             DB.Execute("sproc_tblStock_FilterByProductID");
 
             //if one record is found
-            if (DB.Count == 2)
+            if (DB.Count == 1)
             {
                 //copy the data from the database to the private data members
                 mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
@@ -150,12 +151,42 @@ namespace ClassLibrary
             //return true;
         }
 
+        
+
         public string Valid(string productID, string quantity, string location, string price, string dateUpdated)
         {
             //creates a String variable to store the error 
             String Error = "";
             //creates a temporary DateTime variable to store date values
             DateTime DateTemp;
+
+            int stockQuantity = Int32.Parse(quantity);
+            //if the Quantity is less than 0
+            if (stockQuantity < 0)
+            {
+                //record the error 
+                Error = Error + "The Quantity cannot be less than 0 :";
+            }
+            //if the Quantity is greater than 2000 characters
+            if (stockQuantity > 2000)
+            {
+                //record the error 
+                Error = Error + "The Quantity should be less than 2000 :";
+            }
+
+            Double stockPrice = Double.Parse(price);
+            //if the Quantity is less than 0
+            if (stockPrice < 0)
+            {
+                //record the error 
+                Error = Error + "The Price cannot be less than 0 :";
+            }
+            //if the Quantity is greater than 2000 characters
+            if (stockPrice > 5000)
+            {
+                //record the error 
+                Error = Error + "The Price should be less than 5000 :";
+            }
 
             //if the Location is blank
             if (location.Length == 0)
@@ -167,7 +198,7 @@ namespace ClassLibrary
             if (location.Length > 30)
             {
                 //record the error 
-                Error = Error + "The location must be greater than 30 characters :";
+                Error = Error + "The location must be smaller than 30 characters :";
             }
 
             try

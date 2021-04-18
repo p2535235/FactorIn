@@ -20,25 +20,55 @@ public partial class StockDataEntry : System.Web.UI.Page
 
 
         //capture the ProductID
-        AStock.ProductID = int.Parse(txtProductID.Text);
+        string ProductID = txtProductID.Text;
+        //AStock.ProductID = int.Parse(txtProductID.Text);
         //capture the Quantity
-        AStock.Quantity = int.Parse(txtQuantity.Text);
+        string Quantity = txtQuantity.Text;
+        //AStock.Quantity = int.Parse(txtQuantity.Text);
         //capture the Location
-        AStock.Location = txtLocation.Text;
+        string Location = txtLocation.Text;
+        //AStock.Location = txtLocation.Text;
         //capture the Price 
-        AStock.Price = Double.Parse(txtPrice.Text);
+        string Price = txtPrice.Text;
+        //AStock.Price = Double.Parse(txtPrice.Text);
         //capture the Availability
         AStock.Availability = chkAvailability.Checked;
         //capture the DateUpdated 
-        AStock.DateUpdated = Convert.ToDateTime(txtDateUpdated.Text);
+        string DateUpdated = txtDateUpdated.Text;
+        //AStock.DateUpdated = Convert.ToDateTime(txtDateUpdated.Text);
 
+        //variable to store any error messages
+        string Error = "";
 
+        //validate the data
+        Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+        if (Error == "")
+        {
+            //capture the productID
+            AStock.ProductID = Convert.ToInt32(ProductID);
+            //capture the productID
+            AStock.Quantity = Convert.ToInt32(Quantity);
+            //capture the productID
+            AStock.Location = Location;
+            //capture the productID
+            AStock.Price = double.Parse(Price);
+            //capture the productID
+            AStock.DateUpdated = Convert.ToDateTime(DateUpdated);
 
-        //store the address in the session object 
-        Session["AStock"] = AStock;
+            //store the address in the session object 
+            Session["AStock"] = AStock;
 
-        //navigate to viewer
-        Response.Redirect("StockViewer.aspx");
+            //navigate to viewer
+            Response.Redirect("StockViewer.aspx");
+
+        }
+
+        else
+        {
+            //display the error message
+            lblError.Text = Error;
+        }
+
     }
 
 
