@@ -38,7 +38,7 @@ namespace ClassLibrary
             }
         }
 
-        //private data member for the location property
+        //private data member for the Location property
         private string mLocation;
         //Location public property
         public string Location
@@ -138,22 +138,12 @@ namespace ClassLibrary
                 return false;
             }
         
-
-            //sets the private data members to the test data value of Product ID
-            //mProductID = 21;
-            //mQuantity = 10;
-            //mLocation = "Factory Outlet";
-            //mPrice = 15.0;
-            //mAvailability = true;
-            //mDateUpdated = Convert.ToDateTime("12/02/2021");
-
-            //always return true
-            //return true;
+            
         }
 
         
 
-        public string Valid(string productID, string quantity, string location, string price, string dateUpdated)
+        public string Valid(string productID, string quantity, string Location, string price, string dateUpdated)
         {
             //creates a String variable to store the error 
             String Error = "";
@@ -189,16 +179,16 @@ namespace ClassLibrary
             }
 
             //if the Location is blank
-            if (location.Length == 0)
+            if (Location.Length == 0)
             {
                 //record the error 
-                Error = Error + "The location may not be blank :";
+                Error = Error + "The Location may not be blank :";
             }
             //if the Location is greater than 30 characters
-            if (location.Length > 30)
+            if (Location.Length > 30)
             {
                 //record the error 
-                Error = Error + "The location must be smaller than 30 characters :";
+                Error = Error + "The Location must be smaller than 30 characters :";
             }
 
             try
