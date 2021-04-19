@@ -18,49 +18,64 @@ public partial class StockDataEntry : System.Web.UI.Page
         //creates a new instance of clsStock
         clsStock AStock = new clsStock();
 
-
         //capture the ProductID
         string ProductID = txtProductID.Text;
-        //AStock.ProductID = int.Parse(txtProductID.Text);
         //capture the Quantity
         string Quantity = txtQuantity.Text;
-        //AStock.Quantity = int.Parse(txtQuantity.Text);
         //capture the Location
         string Location = txtLocation.Text;
-        //AStock.Location = txtLocation.Text;
         //capture the Price 
         string Price = txtPrice.Text;
-        //AStock.Price = Double.Parse(txtPrice.Text);
         //capture the Availability
-        AStock.Availability = chkAvailability.Checked;
+        string Availability = chkAvailability.Checked.ToString();
         //capture the DateUpdated 
         string DateUpdated = txtDateUpdated.Text;
-        //AStock.DateUpdated = Convert.ToDateTime(txtDateUpdated.Text);
 
         //variable to store any error messages
         string Error = "";
-
         //validate the data
         Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+
         if (Error == "")
         {
             //capture the productID
             AStock.ProductID = Convert.ToInt32(ProductID);
-            //capture the productID
+            //capture the quantity
             AStock.Quantity = Convert.ToInt32(Quantity);
-            //capture the productID
+            //capture the Location
             AStock.Location = Location;
-            //capture the productID
+            //capture the Price
             AStock.Price = double.Parse(Price);
-            //capture the productID
+            //capture the Date updated
             AStock.DateUpdated = Convert.ToDateTime(DateUpdated);
+            //capture availibility
+            AStock.Availability = chkAvailability.Checked;
 
-            //store the address in the session object 
-            Session["AStock"] = AStock;
+            //create a new instance of the stock collection 
+            clsStockCollection StockList = new clsStockCollection();
 
-            //navigate to viewer
-            Response.Redirect("StockViewer.aspx");
+            // If this is a new record then add the data
+            if (AStock.ProductID == -1)
+            {
+                // Set the thisStock property
+                StockList.ThisStock = AStock;
+                // Add the new record
+                StockList.Add();
+            }
 
+            else // Otherwise it must be updated
+            {
+                // Find the record to update.
+                StockList.ThisStock.Find(AStock.ProductID);
+                // Set the currentStaff property
+                StockList.ThisStock = AStock;
+                // Update the record
+                StockList.Update();
+            }
+
+            // Redirect to the list page
+            Response.Redirect("StockList.aspx");
+            
         }
 
         else
