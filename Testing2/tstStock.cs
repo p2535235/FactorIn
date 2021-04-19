@@ -411,13 +411,17 @@ namespace Testing2
         public void QuantityMid()
         {
             //create an instance of the class we want to create
-            clsStock AStock = new clsStock();
+            clsStock AStock = new clsStock();
+
             //string variable to store any error message
-            String Error = "";
+            String Error = "";
+
             //create some test data to pass to the method
-            string Quantity = "1000"; //this should be ok
+            string Quantity = "1000"; //this should be ok
+
             //invoke the method
-            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+
             //test to see that the result is correct
             Assert.AreEqual(Error, "");
 
@@ -442,16 +446,20 @@ namespace Testing2
         public void QuantityExtremeMax()
         {
             //create an instance of the class we want to create
-            clsStock AStock = new clsStock();
+            clsStock AStock = new clsStock();
+
             //string variable to store any error message
-            String Error = "";
+            String Error = "";
+
             //create some test data to pass to the method
             string Quantity = "4000";
 
             //invoke the method
-            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
+
         }
 
         [TestMethod]
@@ -540,13 +548,17 @@ namespace Testing2
         public void LocationMid()
         {
             //create an instance of the class we want to create
-            clsStock AStock = new clsStock();
+            clsStock AStock = new clsStock();
+
             //string variable to store any error message
-            String Error = "";
+            String Error = "";
+
             //create some test data to pass to the method
-            string Location = "aaaaaaaaaaaaaaa"; //this should be ok
+            string Location = "aaaaaaaaaaaaaaa"; //this should be ok
+
             //invoke the method
-            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+
             //test to see that the result is correct
             Assert.AreEqual(Error, "");
 
@@ -571,17 +583,21 @@ namespace Testing2
         public void LocationExtremeMax()
         {
             //create an instance of the class we want to create
-            clsStock AStock = new clsStock();
+            clsStock AStock = new clsStock();
+
             //string variable to store any error message
-            String Error = "";
+            String Error = "";
+
             //create some test data to pass to the method
             string Location = "";
             Location = Location.PadRight(500, 'a');
 
             //invoke the method
-            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
+
         }
 
 
@@ -671,13 +687,17 @@ namespace Testing2
         public void PriceMid()
         {
             //create an instance of the class we want to create
-            clsStock AStock = new clsStock();
+            clsStock AStock = new clsStock();
+
             //string variable to store any error message
-            String Error = "";
+            String Error = "";
+
             //create some test data to pass to the method
-            string Price = "2500"; //this should be ok
+            string Price = "2500"; //this should be ok
+
             //invoke the method
-            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+
             //test to see that the result is correct
             Assert.AreEqual(Error, "");
 
@@ -702,16 +722,20 @@ namespace Testing2
         public void PriceExtremeMax()
         {
             //create an instance of the class we want to create
-            clsStock AStock = new clsStock();
+            clsStock AStock = new clsStock();
+
             //string variable to store any error message
-            String Error = "";
+            String Error = "";
+
             //create some test data to pass to the method
             string Price = "10000";
 
             //invoke the method
-            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+            Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
+
         }
 
         [TestMethod]

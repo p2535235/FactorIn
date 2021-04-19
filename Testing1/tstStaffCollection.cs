@@ -175,8 +175,8 @@ namespace tstStaffCollection
             if (FilteredStaff.Count == 2)
             {
                 // Check if the Staff ID's of the records are 2 and 3 respectively.
-                if (FilteredStaff.StaffList[0].StaffID != 2) OK = false;
-                if (FilteredStaff.StaffList[1].StaffID != 3) OK = false;
+                if (FilteredStaff.StaffList[0].StaffID != 1) OK = false;
+                if (FilteredStaff.StaffList[1].StaffID != 2) OK = false;
             }
             else OK = false;
             // Test to see that there are no records.
