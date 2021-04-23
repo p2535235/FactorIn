@@ -8,15 +8,43 @@ using ClassLibrary;
 
 public partial class StockDataEntry : System.Web.UI.Page
 {
+    Int32 ProductID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        ProductID = Convert.ToInt32(Session["ProductID"]);
 
+        if (IsPostBack == false)
+        {
+            //if this is not a new record
+            if (ProductID != -1)
+            {
+                //display the current data for the record
+                DisplayStocks();
+            }
+        }
     }
+
+    void DisplayStocks()
+    {
+        //creates an intance of the Stock collection 
+        clsStockCollection Stocks = new clsStockCollection();
+
+        //find record to update 
+        Stocks.ThisStock.Find(ProductID);
+
+        //display the data for this record 
+        txtQuantity.Text = Stocks.ThisStock.Quantity.ToString();
+        txtLocation.Text = Stocks.ThisStock.Location;
+        txtPrice.Text = Stocks.ThisStock.Price.ToString();
+        txtDateUpdated.Text = Stocks.ThisStock.DateUpdated.ToString();
+        chkAvailability.Checked = Stocks.ThisStock.Availability;
+    }
+
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
         //creates a new instance of clsStock
-        clsStock AStock = new clsStock();
+        clsStockCollection Stocks = new clsStockCollection();
 
         //capture the ProductID
         string ProductID = txtProductID.Text;
@@ -34,49 +62,55 @@ public partial class StockDataEntry : System.Web.UI.Page
         //variable to store any error messages
         string Error = "";
         //validate the data
-        Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
-
-        if (Error == "")
-        {
+        Error = Stocks.ThisStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
+        
+         if (Error == "")
+         {
             //capture the productID
-            AStock.ProductID = Convert.ToInt32(ProductID);
+            Stocks.ThisStock.ProductID = Convert.ToInt32(ProductID);
             //capture the quantity
-            AStock.Quantity = Convert.ToInt32(Quantity);
+            Stocks.ThisStock.Quantity = Convert.ToInt32(Quantity);
             //capture the Location
-            AStock.Location = Location;
+            Stocks.ThisStock.Location = Location;
             //capture the Price
-            AStock.Price = double.Parse(Price);
+            Stocks.ThisStock.Price = double.Parse(Price);
             //capture the Date updated
-            AStock.DateUpdated = Convert.ToDateTime(DateUpdated);
+            Stocks.ThisStock.DateUpdated = Convert.ToDateTime(DateUpdated);
             //capture availibility
-            AStock.Availability = chkAvailability.Checked;
+            Stocks.ThisStock.Availability = chkAvailability.Checked;
 
             //create a new instance of the stock collection 
             clsStockCollection StockList = new clsStockCollection();
 
-            // If this is a new record then add the data
-            if (AStock.ProductID == -1)
+            try
             {
-                // Set the thisStock property
-                StockList.ThisStock = AStock;
-                // Add the new record
-                StockList.Add();
+                // If this is a new record then add the data
+                if (Stocks.ThisStock.ProductID == -1)
+                {
+                      // Add the new record
+                        Stocks.Add();
+               
+                }
+
+                else // Otherwise it must be updated
+                {
+                     // Find the record to update.
+                        Stocks.ThisStock.Find(Stocks.ThisStock.ProductID);
+                        // Update the record
+                        Stocks.Update();
+               
+                }
             }
 
-            else // Otherwise it must be updated
+            catch
             {
-                // Find the record to update.
-                StockList.ThisStock.Find(AStock.ProductID);
-                // Set the currentStaff property
-                StockList.ThisStock = AStock;
-                // Update the record
-                StockList.Update();
+                lblError.Text = "There was a problem with the data entered" + Error;
             }
 
             // Redirect to the list page
             Response.Redirect("StockList.aspx");
             
-        }
+         }
 
         else
         {
@@ -84,14 +118,17 @@ public partial class StockDataEntry : System.Web.UI.Page
             lblError.Text = Error;
         }
 
+        
+
     }
+
 
 
 
     protected void btnFind_Click(object sender, EventArgs e)
     {
         //creates an instance of Stock class
-        clsStock AStock = new clsStock();
+        clsStockCollection AStock = new clsStockCollection();
 
         //variable to store the primary key
         Int32 ProductID;
@@ -103,18 +140,29 @@ public partial class StockDataEntry : System.Web.UI.Page
         ProductID = Convert.ToInt32(txtProductID.Text);
 
         //find the record
-        Found = AStock.Find(ProductID);
+        Found = AStock.ThisStock.Find(ProductID);
 
         //if found 
         if (Found == true)
         {
             //display the values of the properties in the form 
-            txtProductID.Text = AStock.ProductID.ToString();
-            txtQuantity.Text = AStock.Quantity.ToString();
-            txtLocation.Text = AStock.Location;
-            txtPrice.Text = AStock.Price.ToString();
-            txtDateUpdated.Text = AStock.DateUpdated.ToString();
+            txtProductID.Text = AStock.ThisStock.ProductID.ToString();
+            txtQuantity.Text = AStock.ThisStock.Quantity.ToString();
+            txtLocation.Text = AStock.ThisStock.Location;
+            txtPrice.Text = AStock.ThisStock.Price.ToString();
+            txtDateUpdated.Text = AStock.ThisStock.DateUpdated.ToString();
 
         }
+        else
+        {
+            lblError.Text = "Invalid ProductID";
+        }
+
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        //redirect back to main 
+        Response.Redirect("StockList.aspx");
     }
 }

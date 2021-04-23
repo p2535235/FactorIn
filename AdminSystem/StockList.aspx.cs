@@ -6,11 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ClassLibrary;
 
-public partial class _1_List : System.Web.UI.Page
+
+public partial class StockList : System.Web.UI.Page
 {
+    
     //this function hndles the load event for the page
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         //if thisis the first time the page is displayed 
         if (IsPostBack == false)
         {
@@ -23,13 +26,14 @@ public partial class _1_List : System.Web.UI.Page
     {
         //creates an intance of the Stock collection 
         clsStockCollection Stocks = new clsStockCollection();
-
+        
         //set the data source to the list of the stocks in the collection
         lstStockList.DataSource = Stocks.StockList;
         //setting the name of the primary key 
         lstStockList.DataValueField = "ProductID";
         //setting the data field to display 
         lstStockList.DataTextField = "Quantity";
+        lstStockList.DataTextField = "ProductID";
         //bind the data to the list 
         lstStockList.DataBind();
     }
@@ -41,7 +45,7 @@ public partial class _1_List : System.Web.UI.Page
         //store -1 into the sessin object to indicate this is a ne record 
         Session["ProductID"] = -1;
         //redirect to the data entry page 
-        Response.Redirect("AStock.aspx");
+        Response.Redirect("StockDataEntry.aspx"); 
     }
 
 
@@ -61,7 +65,7 @@ public partial class _1_List : System.Web.UI.Page
             Session["ProductID"] = ProductID;
 
             //redirect to the edit page 
-            Response.Redirect("AStock.aspx");
+            Response.Redirect("StockDataEntry.aspx"); 
         }
         else // if no record has been selected 
         {
@@ -86,7 +90,7 @@ public partial class _1_List : System.Web.UI.Page
             Session["ProductID"] = ProductID;
 
             // Redirect to the delete page
-            Response.Redirect("StockConfirmDelete.aspx");
+            Response.Redirect("StockConfirmDelete.aspx"); 
         }
         else
         {
@@ -100,18 +104,30 @@ public partial class _1_List : System.Web.UI.Page
         //create an instance of the stock collection 
         clsStockCollection Stocks = new clsStockCollection();
 
-        Int32 Filter = Convert.ToInt32(txtFilter.Text);
+        if (txtFilter.Text != "")
+        {
 
-        Stocks.ReportByQuantity(Filter);
-        lstStockList.DataSource = Stocks.StockList;
+            Int32 Filter = Convert.ToInt32(txtFilter.Text);
 
-        //set the name of the primary key 
-        lstStockList.DataValueField = "ProductID";
-        //set the nae of the field to disply 
-        lstStockList.DataValueField = "Quantity";
+            Stocks.ReportByQuantity(Filter);
+            lstStockList.DataSource = Stocks.StockList;
 
-        //bind the data to the list 
-        lstStockList.DataBind();
+            //set the name of the primary key 
+            lstStockList.DataValueField = "ProductID";
+            //set the nae of the field to disply 
+            lstStockList.DataValueField = "Quantity";
+
+            //bind the data to the list 
+            lstStockList.DataBind();
+            
+        }
+
+        else
+        {
+            DisplayStocks();
+        }
+
+
 
     }
 
@@ -133,4 +149,6 @@ public partial class _1_List : System.Web.UI.Page
         lstStockList.DataBind();
 
     }
+
+  
 }

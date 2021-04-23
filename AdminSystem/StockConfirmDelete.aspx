@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StockConfirmDelete.aspx.cs" Inherits="_1_ConfirmDelete" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StockConfirmDelete.aspx.cs" Inherits="StockConfirmDelete" %>
 
 <!DOCTYPE html>
 
@@ -9,6 +9,10 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            Are you sure you want to delete this record?<br />
+            <br />
+            <asp:Button ID="btnYes" runat="server" OnClick="btnYes_Click" Text="Yes" />
+&nbsp;<asp:Button ID="btnNo" runat="server" Text="No" OnClick="btnNo_Click" />
         </div>
     </form>
 </body>

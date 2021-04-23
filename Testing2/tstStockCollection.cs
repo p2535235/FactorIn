@@ -238,15 +238,16 @@ namespace Testing2
         public void ReportByQuantityOK()
         {
             //create an instance of the Stock Collection class containing unfilterd results 
-            clsStockCollection AllStock = new clsStockCollection();
+            //clsStockCollection AllStock = new clsStockCollection();
             //create an instance of the Stock Collection class containing filterd results 
             clsStockCollection FilteredStock = new clsStockCollection();
 
             //apply a blank string
             FilteredStock.ReportByQuantity(0);
 
-            //test to see that the two values are the same 
-            Assert.AreEqual(AllStock.Count, FilteredStock.Count);
+            //test to see that the two values are the same
+            //Test to see no fields show up 
+            Assert.AreEqual(0, FilteredStock.Count);
 
         }
 
@@ -273,7 +274,7 @@ namespace Testing2
             Boolean OK = true;
 
             //apply a Quantity tht doesnt exist 
-            FilteredStock.ReportByQuantity(500);
+            FilteredStock.ReportByQuantity(4);
 
             //check that the correct number of records are found 
             if(FilteredStock.Count == 2)
