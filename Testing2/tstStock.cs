@@ -9,10 +9,10 @@ namespace Testing2
     {
         //good test data
         //creates some test data to pass the method
-        string ProductID = "1239";
-        string Quantity = "13";
-        string Location = "Factory 1";
-        string Price = "7";
+        string ProductID = "1235";
+        string Quantity = "4";
+        string Location = "Fact1";
+        string Price = "30";
         string DateUpdated = DateTime.Now.Date.ToString();
          
         [TestMethod]
@@ -215,8 +215,10 @@ namespace Testing2
             //invoke the method
             Found = AStock.Find(ProductID);
 
+            String fact = "Fact1";
+
             //checks the location
-            if (AStock.Location != "Fact1")
+            if (!AStock.Location.Equals(fact))
             {
                 OK = false;
             }
@@ -730,7 +732,7 @@ namespace Testing2
             TestDate = TestDate.AddYears(-100);
 
             //convert the date variable to a string variable
-            string DateAdded = TestDate.ToString();
+            string DateUpdated = TestDate.ToString();
 
 
             //invoke the method
@@ -755,7 +757,7 @@ namespace Testing2
             TestDate = TestDate.AddYears(-1);
 
             //convert the date variable to a string variable
-            string DateAdded = TestDate.ToString();
+            string DateUpdated = TestDate.ToString();
 
             //invoke the method
             Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
@@ -778,7 +780,7 @@ namespace Testing2
             TestDate = DateTime.Now.Date;
 
             //convert the date variable to a string variable
-            string DateAdded = TestDate.ToString();
+            string DateUpdated = TestDate.ToString();
 
 
             //invoke the method
@@ -804,7 +806,7 @@ namespace Testing2
             TestDate = TestDate.AddYears(1);
 
             //convert the date variable to a string variable
-            string DateAdded = TestDate.ToString();
+            string DateUpdated = TestDate.ToString();
 
             //invoke the method
             Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);
@@ -829,7 +831,7 @@ namespace Testing2
             TestDate = TestDate.AddYears(100);
 
             //convert the date variable to a string variable
-            string DateAdded = TestDate.ToString();
+            string DateUpdated = TestDate.ToString();
 
             //invoke the method
             Error = AStock.Valid(ProductID, Quantity, Location, Price, DateUpdated);

@@ -42,7 +42,7 @@ namespace ClassLibrary
             mStockList = new List<clsStock>();
 
             //While there are records to process 
-            while (Index > RecordCount)
+            while (Index < RecordCount)
             {
                 //create a blank Stock
                 clsStock AStock = new clsStock();

@@ -119,6 +119,7 @@ namespace ClassLibrary
             //if one record is found
             if (DB.Count == 1)
             {
+                
                 //copy the data from the database to the private data members
                 mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
                 mQuantity = Convert.ToInt32(DB.DataTable.Rows[0]["Quantity"]);
@@ -195,7 +196,7 @@ namespace ClassLibrary
             {
                 //copy the dateAdded value to the DateTemp variable
                 DateTemp = Convert.ToDateTime(dateUpdated);
-                if (DateTemp < DateTime.Now.Date)
+                if (!DateTemp.Equals(DateTime.Now.Date))
                 {
                     //record the error
                     Error = Error + "The date cannot be in the past : ";
