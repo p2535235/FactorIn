@@ -196,7 +196,7 @@ namespace ClassLibrary
             {
                 //copy the dateAdded value to the DateTemp variable
                 DateTemp = Convert.ToDateTime(dateUpdated);
-                if (!DateTemp.Equals(DateTime.Now.Date))
+                if (DateTemp < DateTime.Now.Date)
                 {
                     //record the error
                     Error = Error + "The date cannot be in the past : ";
