@@ -150,5 +150,8 @@ public partial class StockList : System.Web.UI.Page
 
     }
 
-  
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StockDataEntry.aspx");
+    }
 }

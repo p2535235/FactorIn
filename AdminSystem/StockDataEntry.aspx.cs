@@ -67,7 +67,14 @@ public partial class StockDataEntry : System.Web.UI.Page
          if (Error == "")
          {
             //capture the productID
-            Stocks.ThisStock.ProductID = Convert.ToInt32(ProductID);
+            try
+            {
+                Stocks.ThisStock.ProductID = Convert.ToInt32(ProductID);
+            }
+            catch
+            {
+                lblError.Text = "You have to enter a ProductID" + Error;
+            }
             //capture the quantity
             Stocks.ThisStock.Quantity = Convert.ToInt32(Quantity);
             //capture the Location
@@ -78,6 +85,7 @@ public partial class StockDataEntry : System.Web.UI.Page
             Stocks.ThisStock.DateUpdated = Convert.ToDateTime(DateUpdated);
             //capture availibility
             Stocks.ThisStock.Availability = chkAvailability.Checked;
+            
 
             //create a new instance of the stock collection 
             clsStockCollection StockList = new clsStockCollection();
@@ -125,7 +133,7 @@ public partial class StockDataEntry : System.Web.UI.Page
 
 
 
-    /*protected void btnFind_Click(object sender, EventArgs e)
+    protected void btnFind_Click(object sender, EventArgs e)
     {
         //creates an instance of Stock class
         clsStockCollection AStock = new clsStockCollection();
@@ -158,11 +166,13 @@ public partial class StockDataEntry : System.Web.UI.Page
             lblError.Text = "Invalid ProductID";
         }
 
-    }*/
+    }
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         //redirect back to main 
         Response.Redirect("StockList.aspx");
     }
+
+    
 }
