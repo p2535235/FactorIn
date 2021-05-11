@@ -251,7 +251,9 @@ namespace Testing2
 
         }
 
-        [TestMethod]
+        //As the filter is for an Int, the ReportByQuantityNoneFound is not applicable
+
+        /*[TestMethod]
         public void ReportByQuantityNoneFound()
         {
             //create an instance of the filtered data 
@@ -262,7 +264,8 @@ namespace Testing2
 
             //test to see that there are no records 
             Assert.AreEqual(0, FilteredStock.Count);
-        }
+        }*/
+
 
         [TestMethod]
         public void ReportByQuantityTestDataFound()

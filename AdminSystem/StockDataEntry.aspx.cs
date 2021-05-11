@@ -16,11 +16,11 @@ public partial class StockDataEntry : System.Web.UI.Page
         if (IsPostBack == false)
         {
             //if this is not a new record
-            if (ProductID != -1)
-            {
+            //if (ProductID != -1)
+            //{
                 //display the current data for the record
                 DisplayStocks();
-            }
+            //}
         }
     }
 

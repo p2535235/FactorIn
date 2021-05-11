@@ -106,7 +106,7 @@ namespace ClassLibrary
             }
         }
 
-        public bool Find(int productID)
+        public bool Find(int ProductID)
         {
             //create an instance of the data connection
             clsDataConnection DB = new clsDataConnection();

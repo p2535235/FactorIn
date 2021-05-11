@@ -132,7 +132,7 @@ namespace Testing2
             Boolean Found = false;
 
             //creates a test data to use with the method
-            Int32 ProductID = 1235;
+            Int32 ProductID = 1234;
 
             //invokes the method
             Found = AStock.Find(ProductID);
@@ -188,7 +188,7 @@ namespace Testing2
             Found = AStock.Find(ProductID);
 
             //checks the quantity 
-            if (AStock.Quantity != 4)
+            if (AStock.Quantity != 12)
             {
                 OK = false;
             }
@@ -246,7 +246,7 @@ namespace Testing2
             Found = AStock.Find(ProductID);
 
             //checks the price 
-            if (AStock.Price != 30.0)
+            if (AStock.Price != 12)
             {
                 OK = false;
             }
@@ -302,7 +302,7 @@ namespace Testing2
             Found = AStock.Find(ProductID);
 
             //checks the date updated
-            if (AStock.DateUpdated != Convert.ToDateTime("02/02/2021"))
+            if (AStock.DateUpdated != Convert.ToDateTime("23/04/2021"))
             {
                 OK = false;
             }
